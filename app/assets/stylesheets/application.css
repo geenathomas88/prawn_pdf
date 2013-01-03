@@ -1,0 +1,72 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require_tree .
+ */
+ @import 'bootstrap';
+ *= require twitter/bootstrap
+/* .jquery_form_error_message {
+  display: block;
+  margin-top: 3px;
+ }*/
+ 
+ .welcome
+ {
+ 	margin-top: 10px;
+ }
+
+.multiselect {
+    width:20em;
+    height:15em;
+    border:solid 1px #c0c0c0;
+    overflow:auto;
+}
+ 
+.multiselect label {
+    display:block;
+}
+ 
+.multiselect-on {
+    color:#ffffff;
+    background-color:#000099;
+}
+
+.content {
+  background-color: #eee;
+  padding: 20px;
+  margin: 0 -20px; /* negative indent the amount of the padding to maintain the grid system */
+  -webkit-border-radius: 0 0 6px 6px;
+  -moz-border-radius: 0 0 6px 6px;
+  border-radius: 0 0 6px 6px;
+  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+  -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+  box-shadow: 0 1px 2px rgba(0,0,0,.15);
+}
+
+.fill
+{
+    background-color: #5C5F66;
+    color: #FFFFFF;
+    text-align: center;
+    height: 40px;
+    font-size: 20px;
+    vertical-align: middle;        
+}
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #5C5F66;
+    color: #FFFFFF;
+    text-align: left;
+    
+    }
+.input-date{width:180px;}    

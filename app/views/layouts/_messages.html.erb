@@ -1,0 +1,13 @@
+<script type="text/javascript">
+$(document).ready(function() {
+  $(".alert").fadeOut(3000);
+});
+</script>
+<% flash.each do |name, msg| %>
+  <% if msg.is_a?(String) %>
+    <div class="alert alert-<%= name == :notice ? "success" : "error" %>"data-alert = "alert">
+      <a class="close" data-dismiss="alert">&#215;</a>
+      <%= content_tag :div, msg, :id => "flash_#{name}", :style => "text-align: center;" %>
+    </div>
+  <% end %>
+<% end %>

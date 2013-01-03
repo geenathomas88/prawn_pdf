@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @sow.name %>
+</p>
+
+<p>
+  <b>Sow date:</b>
+  <%= @sow.sow_date %>
+</p>
+
+
+<%= link_to 'Edit', edit_sow_path(@sow) %> |
+<%= link_to 'Back', sows_path %>

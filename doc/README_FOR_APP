@@ -1,0 +1,12 @@
+DAMP Tool
+
+Self Authentication 
+	Login with an email and password. 
+	New users can signup with email, associate id, asscociate name, email, password.
+	Test cases are passed for the self authentication story.
+Gem Specifications
+===================
+Gem for authentication
+-Self Authentication: Devise
+Gem used for layout : twitter-bootstrap-rails
+	Dependencies : therubyracer,less-rails

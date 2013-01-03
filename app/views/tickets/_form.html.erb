@@ -1,0 +1,192 @@
+  <script>
+  $(document).ready(function(){
+    $("#new_ticket").validate();
+    jQuery.extend(jQuery.validator.messages, {
+      required: 'This is a mandatory field',
+    });
+  });
+  </script>
+<%= form_for(@ticket, :html => { :class => "form-horizontal"} ) do |f| %>
+  <% if @ticket.errors.any? %> 
+    <div id="error_explanation"> 
+      <h2><%= pluralize(@ticket.errors.count, "error") %> prohibited this ticket from being saved:</h2>
+      <ul>
+      <% @ticket.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %> 
+  <p style = "color:red">*Mandatory fields</p>
+<div class="span6">
+  <fieldset class="well the-fieldset">
+    <legend class="the-legend"> Ticket Information</legend>
+        <div class="control-group">
+          <div class="control-label"><%= f.label :ticket_number %></div>
+          <div class="controls"><%= f.text_field :job_ticket_no ,:readonly => true %></div>
+        </div>
+        <div class="control-group">
+          <div class="control-label"><%= f.label :product %></div>
+          <div class="controls"><%= select_tag("ticket[product_id]", options_for_select(@product.collect { |product| [product.name, product.id] },@ticket.product_id), {:prompt => "Select a Product",:class => "required"})%><font color ="red">*</font></div>    
+        </div>
+        <div class="control-group">
+          <div class="control-label"><%= f.label :brand %></div>
+          <div class="controls"><%= select_tag("ticket[brand_id]", options_for_select(@brand.collect { |brand| [brand.name, brand.id] },@ticket.brand_id), {:prompt => "Select a Brand"})%></div>
+        </div>
+        <div class="control-group">
+          <div class="control-label"><%= f.label :activity %></div>
+          <div class="controls"><%= select_tag("ticket[activity_id]", options_for_select(@activity.collect { |activity| [activity.name, activity.id] },@ticket.activity_id), {:prompt => "Select an Activity",:class => "required"})%><font color ="red">*</font></div>
+        </div>
+      <div class="control-group">
+        <div class="control-label"><%= f.label :activity_status %></div>
+        <div class="controls"><%= select_tag("ticket[activity_status_id]", options_for_select(@activity_status.collect { |activity_status| [activity_status.name, activity_status.id] },@ticket.activity_status_id), {:prompt => "Select an Activity Status"})%></div>
+      </div>    
+      <div class="control-group">
+        <div class="control-label">Assign Group</div>
+        <div class="controls">
+
+          <select id="assign_user_id">
+            <option>Select Group</option>
+            <option <% if @ticket_user == "Production"%>selected="selected" <%end%>>Production</option>
+            <option <% if @ticket_user == "QA"%>selected="selected" <%end%>>QA</option>
+          </select></div>
+      </div>    
+      <div class="control-group">
+        <div class="control-label"><%= f.label :owner %></div>
+           <div class="controls">        
+
+          <%= select_tag("ticket[user_id]", options_for_select(@user.collect { |user| [user.associate_name, user.id] },@ticket.user_id),option = {:prompt => "Select an Owner",:class => "required"})%><font color ="red">*</font>
+
+        </div>
+      </div>        
+      <div class="control-group">
+        <div class="control-label"><%= f.label :expected_delivery_date %></div> 
+        <div class="controls"><div class="input-append date" id="dp3" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
+        <%= f.text_field :expected_deliver_date ,:class => "input-date",:readonly => true%>
+        <span class="add-on"><i class="icon-th"></i></span></div>
+        </div>
+      </div>  
+  </fieldset>	
+</div>
+<div class="span5">
+  <fieldset class="well the-fieldset">
+      <legend class="the-legend">Client / Project Information</legend> 
+      <div class="control-group">
+          <div class="control-label"><%= f.label :job_region_id %></div>
+          <div class="controls"><%= select_tag("ticket[job_region_id]", options_for_select(@job_region.collect { |job_region| [job_region.name, job_region.id] },@ticket.job_region_id), {:prompt => "Select a Job Region"})%></div>
+        </div>         
+        <div class="control-group">
+          <div class="control-label"><%= f.label :client_name %></div>
+          <div class="controls"><%= f.collection_select :client_id, Client.find(:all), :id, :client_name, {:prompt => "Select a Client"}%>
+          </div>
+        </div>
+        <div class="control-group">
+          <div class="control-label"><%= f.label :project_name %></div>
+          <div class="controls">   <%= f.collection_select :project_id, @project, :id, :name, :prompt => "Select a Project" %>
+          </div>
+        </div>      
+        <div class="control-group">
+          <div class="control-label"><%= f.label :change_type %></div>
+          <div class="controls"><%= select_tag("ticket[change_type_id]", options_for_select(@change_type.collect { |change_type| [change_type.name, change_type.id] },@ticket.change_type_id), {:prompt => "Select a Change Type"})%></div>
+        </div>      
+        <div class="control-group">
+          <div class="control-label"><%= f.label :priority %></div>
+          <div class="controls"><%= select_tag("ticket[priority_id]", options_for_select(@priority.collect { |priority| [priority.name, priority.id] },@ticket.priority_id), {:prompt => "Select a Priority"})%></div>   
+        </div>
+        <!--div class="control-group">
+          <div class="control-label"><%= f.label :version %></div>
+          <div class="controls"><%= f.text_field :version %></div>
+        </div-->
+        <div class="control-group">
+          <div class="control-label"><%= f.label :quote_value %></div>
+          <div class="controls"><%= f.text_field :quote_values %></div>
+        </div>             
+  </fieldset>
+</div>
+<div class="span12">
+  <table width= "100%">
+  	<tr><td>&nbsp;</td></tr>
+  	<tr>
+  		<td align="center">
+  			<%= f.submit :class=>"btn btn-primary"%>
+  		</td>
+  	</tr>
+  </table>
+</div>
+ <!--
+  <div class="field">
+    <%= f.label :ncn_raised_by %><br />
+    <%= f.text_field :ncn_raised_by %>
+  </div>
+  <div class="field">
+    <%= f.label :onsite_coordinator %><br />
+    <%= f.text_field :onsite_coordinator %>
+  </div>
+  <div class="field">
+    <%= f.label :schedular %><br />
+    <%= f.text_field :schedular , :class => "datepicker"%>
+  </div>
+  <div class="field">
+    <%= f.label :prevalidation_start %><br />
+    <%= f.text_field :prevalidation_start , :class => "datepicker"%>
+  </div>
+  <div class="field">
+    <%= f.label :prevalidation_end %><br />
+    <%= f.text_field :prevalidation_end , :class => "datepicker"%>
+  </div>
+  <div class="field">
+    <%= f.label :allocation %><br />
+    <%= f.text_field :allocation %>
+  </div>
+  <div class="field">
+    <%= f.label :production %><br />
+    <%= f.text_field :production %>
+  </div>
+  <div class="field">
+    <%= f.label :production_start %><br />
+    <%= f.text_field :production_start , :class => "datepicker"%>
+  </div>
+  <div class="field">
+    <%= f.label :production_end %><br />
+    <%= f.text_field :production_end %>
+  </div>
+  <div class="field">
+    <%= f.label :QA %><br />
+    <%= f.text_field :QA %>
+  </div>
+  <div class="field">
+    <%= f.label :QA_start %><br />
+    <%= f.text_field :QA_start, :class => "datepicker" %>
+  </div>
+  <div class="field">
+    <%= f.label :QA_end %><br />
+    <%= f.text_field :QA_end, :class => "datepicker" %>
+  </div>
+  <div class="field">
+    <%= f.label :ncn_start %><br />
+    <%= f.text_field :ncn_start, :class => "datepicker" %>
+  </div>
+  <div class="field">
+    <%= f.label :production_complete %><br />
+    <%= f.text_field :production_complete , :class => "datepicker"%>
+  </div>
+  <div class="field">
+    <%= f.label :onsite_review_close %><br />
+    <%= f.text_field :onsite_review_close %>
+  </div>
+  <div class="field">
+    <%= f.label :agency_review_close %><br />
+    <%= f.text_field :agency_review_close %>
+  </div>
+  <div class="field">
+    <%= f.label :deliver %><br />
+    <%= f.text_field :deliver %>
+  </div>  
+-->	
+<% end %>
+<script>
+$(function(){  
+  $('#dp3').datepicker();
+});
+</script>
+

@@ -1,0 +1,33 @@
+  <script>
+  $(document).ready(function(){
+    $("#new_group").validate();
+    jQuery.extend(jQuery.validator.messages, {
+      required: 'Please enter a Group name',
+    });
+  });
+  </script>
+<%= form_for(@group) do |f| %>
+  <% if @group.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@group.errors.count, "error") %> prohibited this group from being saved:</h2>
+      <ul>
+      <% @group.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<fieldset class="well the-fieldset">    
+  <div class="field">
+    <div class="control-label">Group Name</div>
+    <div class="controls"><%= f.text_field :group_name,:class=>"required" %></div>
+  </div>
+  <div class="field">
+    <div class="control-label">Description</div>
+    <div class="controls"><%= f.text_area :description , :size => "5x5"%></div>
+  </div>
+  <div class="actions">
+    <%= f.submit :class=>"btn btn-primary"%>    
+  </div>
+</fieldset>
+<% end %>

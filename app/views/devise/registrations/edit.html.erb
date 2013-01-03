@@ -1,0 +1,42 @@
+<script type="text/javascript">
+    $(document).ready(function() {
+      $("#edit_user").validate(); 
+});
+</script>
+<div class="login-form">
+<h5>Edit <%= resource_name.to_s.humanize %> Details</h5>
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put,:class => "form-horizontal"}) do |f| %>
+  <%= devise_error_messages! %>
+  <fieldset class="well the-fieldset">
+    <div class="control-label">Associate Id</div>
+    <div class="controls"><%= f.text_field :associate_id ,:class=>"required"%></div><br/>
+  
+    <div class="control-label">Associate Name</div>
+    <div class="controls"><%= f.text_field :associate_name ,:class=>"required"%></div><br/>
+
+    <div class="control-label">Email</div>
+    <div class="controls"><%= f.email_field :email ,:class=>"required"%></div><br/>
+
+    <div class="control-label">password <i>(leave blank if you don't want to change it)</i></div><br/>
+    <div class="controls"><%= f.password_field :password, :autocomplete => "off" %>
+    </div><br/>
+
+    <div class="control-label">Confirm Password </div>
+    <div class="controls"><%= f.password_field :password_confirmation %></div><br/>
+
+    <div class="control-label">Current Password<i>(we need your current password to confirm your changes)</i></div><br/>
+    <div class="controls"><%= f.password_field :current_password ,:class=>"required"%>
+    </div><br/>
+     <div class="controls">
+        <%= f.submit "Update" %>
+    </div>
+</fieldset>
+
+ <% end %>
+</div>
+<!--
+<h3>Cancel my account</h3>
+
+<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %>.</p>
+
+<%= link_to "Back", :back %>-->

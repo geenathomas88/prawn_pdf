@@ -1,0 +1,94 @@
+<!-- TODO - why is the inline JS -->
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#btnRight').click(function(e) {
+        var selectedOpts = $('#lstBox1 option:selected');
+        if (selectedOpts.length == 0) {
+            //alert("Nothing to move .");
+            e.preventDefault();
+        }
+        $('#lstBox2').append($(selectedOpts).clone());
+        $(selectedOpts).remove();
+        e.preventDefault();
+    });
+
+    $('#btnLeft').click(function(e) {
+        var selectedOpts = $('#lstBox2 option:selected');
+        if (selectedOpts.length == 0) {
+            //alert("Nothing to move .");
+            e.preventDefault();
+        }
+
+        $('#lstBox1').append($(selectedOpts).clone());
+        $(selectedOpts).remove();
+        e.preventDefault();
+    });
+
+    // jQuery double click functionality
+
+    $('#lstBox2').bind('dblclick', function() {
+      // alert($('#lstBox2 :selected').text());
+      $('#lstBox1').append($('#lstBox2 :selected').clone());
+      $('#lstBox2 :selected').remove();
+      e.preventDefault();
+        });
+
+    $('#lstBox1').bind('dblclick', function() {
+      // alert($('#lstBox2 :selected').text());
+      $('#lstBox2').append($('#lstBox1 :selected').clone());
+      $('#lstBox1 :selected').remove();
+      e.preventDefault();
+        });
+ });
+
+$('#assign_users_button').click(function () {
+  //clear out old selected
+  $('#assign_users').val('');
+  selected_users = new Array();
+  $("#lstBox2 option").each(
+    function(index, option)
+    {
+      selected_users[index] = option.value;
+    });
+  $('#assign_users').val(selected_users);
+  return true;
+});
+
+</script>
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Assign User</h3>
+    </div>
+    <div>
+    </div>
+
+
+<%= form_tag assign_user_path  do  %>
+
+  <table style="margin: 40px 3px 20px 35px"> 
+
+  <tr>
+  <td> 
+      <%= select_tag("user_ids", options_for_select(@user_unselected.collect { |cat| [cat.associate_name, cat.id] }), {:multiple=>true, :size=>10,:id=>"lstBox1"})%>
+    </td>
+    <td style='width:50px;text-align:center;vertical-align:middle;'>
+      <input type='button' id='btnRight' value ='  >  '/>
+      <br/><input type='button' id='btnLeft' value ='  <  '/>
+    </td>
+    <td>
+      <%= select_tag("assign_user_ids", options_for_select(@user_selected.collect { |cat| [cat.associate_name, cat.id] }), {:multiple=>true, :size=>10,:id=>"lstBox2"})%>
+   </td>
+    <%= hidden_field_tag "assign_users" %>  
+  <%= hidden_field_tag "groupid", params[:groupid] %>
+   
+  </tr>
+  </table>
+  <%= submit_tag "Add",:id =>"assign_users_button",:style => "margin: 2px 3px 2px 252px;"  %>
+<%end%> 
+<div class="modal-footer">
+<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+</div>
+
+
+

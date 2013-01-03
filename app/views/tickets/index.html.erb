@@ -1,0 +1,61 @@
+<table>
+  <tr>
+   <td width ="91%"><h5>Listing Tickets</h5></td>
+   <td><%= link_to 'New Ticket', new_ticket_path , class: "btn"%></td>    
+  </tr>
+</table>
+
+<table class ="table table-striped">  
+  <tr>    
+    <th>Ticket No</th>
+    <th>Client</th>
+    <th>Project</th>
+    <th>Brand</th>
+    <th>Product</th>
+    <th>Activity</th>
+    <th>Change Type</th>
+    <th>Activity Status</th>
+    <!--th>Version</th-->
+    <th>Priority</th>
+    <th>Created On</th>
+    <th>Expected Deliver Date</th>
+    <th>Quote Value</th>
+    <th>Owner</th>
+    <th>Download PDF</th>
+    
+  </tr>
+
+<% @tickets.each do |ticket| %>
+  <tr>   
+    <td align="center"><%= ticket.job_ticket_no%>
+    </td> 
+    <td><%= ticket.client.client_name if ticket.client%></td>
+    <td><%= ticket.project.name if ticket.project%></td>
+    <td><%= ticket.brand.name if ticket.brand%></td>
+    <td><%= ticket.product.name if ticket.product%></td>
+    <td><%= ticket.activity.name if ticket.activity%></td>
+    <td><%= ticket.change_type.name if ticket.change_type%></td>
+    <td><%= ticket.activity_status.name if ticket.activity_status%></td>
+    <!--td><%= ticket.version %></td-->
+    <td><%= ticket.priority.name if ticket.priority  %></td>
+    <td><%= ticket.created_at.strftime("%Y-%m-%d")%></td>
+    <td><%= ticket.expected_deliver_date %></td>
+    <td><%= ticket.quote_values%></td>
+    <td><%= ticket.user.associate_name if ticket.user%></td>   
+    <td><%= link_to image_tag("pdf.png"), ticket_path(ticket, :format => "pdf") %></td>
+
+  </tr>
+<% end %>
+</table>
+ 
+<table><tr><td align = "center">
+    
+    <%=will_paginate(@tickets, :renderer => 'BootstrapPaginationHelper::LinkRenderer') %>
+</td></tr>
+</table>
+<script type="text/javascript">
+ $("a[data-toggle=modal]").click(function (e) {
+  lv_target = $(this).attr('data-target')
+  lv_url = $(this).attr('href')
+  $(lv_target).load(lv_url)})
+</script>

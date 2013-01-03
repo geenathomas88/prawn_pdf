@@ -1,0 +1,14 @@
+<table width = 100%>
+	<tr>
+		<td align = "right" width= "91%">
+			<%= link_to "Edit",edit_group_path(@group), class: "btn"%>
+		</td>
+		<td><%= link_to 'Back', groups_path , class: "btn"%></td>
+	</tr>
+</table>
+	<p>Group name: 
+		<%= link_to @group.group_name,edit_group_path(@group)%>
+	</p>
+	<p>Description: 
+		<%= @group.description%>
+	</p>	

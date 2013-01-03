@@ -1,0 +1,14 @@
+<table width = 100%>
+	<tr>
+		<td align = "right" width= "90%">
+			<%= link_to "Edit",edit_role_path(@role), class: "btn"%>
+		</td>
+		<td><%= link_to 'Back', roles_path , class: "btn"%></td>
+	</tr>
+</table>
+	<p>Role name: 
+		<%= link_to @role.name,edit_role_path(@role)%>
+	</p>
+	<p>Description: 
+		<%= @role.description%>
+	</p>

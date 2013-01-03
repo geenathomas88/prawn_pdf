@@ -1,0 +1,45 @@
+<table>
+  <tr>
+    <td width ="91%"><h5>Listing Groups</h5></td>    
+    <td><%= link_to 'New Group', new_group_path , class: "btn"%></td>
+  </tr>
+</table>
+<table class ="table table-striped">  
+  <tr>
+    <th>Group name</th>
+    <th>Description</th>
+    <th>Assign User</th>
+    <th>Show</th>
+    <th>Edit</th>
+    <th>Destroy</th>
+  </tr>
+<% @groups.each do |group| %>
+  <tr>
+    <td><%= group.group_name %></td>
+    <td><%= group.description%></td>
+    <td  align="center"><%= link_to '<i class="icon-user"></i>'.html_safe, {:controller => "groups", :action => "add_user", :groupid => group.id }, :data => {:toggle => "modal", :target => "#myModal"}%>
+    </td>    
+    <td><%= link_to '<i class="icon-eye-open"></i>'.html_safe, group %></td>
+    <td><%= link_to '<i class="icon-pencil"></i>'.html_safe, edit_group_path(group) %></td>
+    <td><%= link_to '<i class="icon-trash"></i>'.html_safe, group, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+<div id="assigned_user">
+</div>
+    <!-- Button to trigger modal -->         
+    <!-- Modal -->
+  <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 id="myModalLabel">Assign User</h3>
+      </div>
+      <div class="modal-body">      
+      </div>     
+  </div>
+<script type="text/javascript">
+ $("a[data-toggle=modal]").click(function (e) {
+  lv_target = $(this).attr('data-target')
+  lv_url = $(this).attr('href')
+  $(lv_target).load(lv_url)})
+</script>

@@ -1,0 +1,50 @@
+<script type="text/javascript">
+$(document).ready(function(){
+$("#ticket_client_id").change(function(e){
+$("#ticket_project_id").children().remove();
+$(document).ready(function(){
+  $.ajax({
+    type: "GET",
+    url: "/find_project/"+$("#ticket_client_id").val(),    
+    dataType: "json",
+    success: function(data){
+      for( var i=0; i<data.length; i++ ){
+        $("#ticket_project_id").append(new Option( data[i].name,data[i].id));
+      }
+    }
+  });
+});
+
+
+});
+});
+$(document).ready(function(){
+$("#assign_user_id").change(function(e){
+$("#ticket_user_id").children().remove();
+$(document).ready(function(){
+  $.ajax({
+    type: "GET",
+    url: "/find_user/"+$("#assign_user_id").val(),    
+    dataType: "json",
+    success: function(data){
+      for( var i=0; i<data.length; i++ ){
+        $("#ticket_user_id").append(new Option( data[i].associate_name,data[i].id));
+      }
+    }
+  });
+});
+
+
+});
+
+});
+</script>
+
+<table>
+  <tr>
+    <td width ="91%"><h5>Edit Ticket</h5></td>    
+    <td><%= link_to 'Back to List', tickets_path , class: "btn"%></td>
+  </tr>
+</table>
+
+<%= render 'form' %>

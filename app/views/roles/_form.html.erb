@@ -1,0 +1,30 @@
+ <script>
+  $(document).ready(function(){
+    $("#new_role").validate();
+  });
+  </script>
+<%= form_for(@role) do |f| %>
+  <% if @role.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@role.errors.count, "error") %> prohibited this role from being saved:</h2>
+      <ul>
+      <% @role.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<fieldset class="well the-fieldset">   
+  
+    <div class="control-label">Role Name</div>
+    <div class="controls"><%= f.text_field :name,:class=>"required" %></div>
+
+    <div class="control-label">Description</div>
+    <div class="controls"><%= f.text_area :description , :size => "5x5"%></div>
+
+  <div class="actions">
+    <%= f.submit :class=>"btn btn-primary"%>  
+  </div>
+    </fieldset>
+<% end %>

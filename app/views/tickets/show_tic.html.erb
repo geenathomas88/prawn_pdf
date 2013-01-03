@@ -1,0 +1,76 @@
+<div class = "form-horizontal">
+<div class="span6">
+  <fieldset class="well the-fieldset">
+    <legend class="the-legend"> Ticket Information</legend>
+        <div class="control-group">
+          <div class="control-label">Ticket No:</div>
+          <div class="controls"><%= @ticket.job_ticket_no %></div>
+        </div>
+        <div class="control-group">
+          <div class="control-label">Product :</div>
+          <div class="controls"><%= @ticket.product.name if @ticket.product%></div>    
+        </div>
+        <div class="control-group">
+          <div class="control-label">Brand :</div>
+          <div class="controls"><%= @ticket.brand.name if @ticket.brand%></div>
+        </div>
+        <div class="control-group">
+          <div class="control-label">Activity :</div>
+          <div class="controls"><%= @ticket.activity.name if @ticket.activity %></div>
+        </div>
+      <div class="control-group">
+        <div class="control-label">Activity Status :</div>
+        <div class="controls"><%= @ticket.activity_status.name if @ticket.activity_status %></div>
+      </div>        
+      <div class="control-group">
+        <div class="control-label">Owner :</div>
+        <div class="controls">
+          <%= @ticket.user.associate_name if @ticket.user%>
+        </div>
+      </div>        
+      <div class="control-group">
+        <div class="control-label">Expected Deliver Date</div> 
+        <div class="controls"><%= @ticket.expected_deliver_date %>
+        </div>
+      </div>  
+  </fieldset>   
+</div>
+
+
+
+<div class="span5">
+  <fieldset class="well the-fieldset">
+      <legend class="the-legend">Client / Project Information</legend> 
+      <div class="control-group">
+          <div class="control-label">Job Region :</div>
+          <div class="controls"><%= @ticket.job_region.name if @ticket.job_region%></div>
+        </div>         
+        <div class="control-group">
+          <div class="control-label">Client :</div>
+          <div class="controls"><%= @ticket.client.client_name if @ticket.client%>
+          </div>
+        </div>
+        <div class="control-group">
+          <div class="control-label">Project :</div>
+          <div class="controls"> <%= @ticket.project.name if @ticket.project%>
+          </div>
+        </div>      
+        <div class="control-group">
+          <div class="control-label">Change Type :</div>
+          <div class="controls"><%= @ticket.change_type.name if @ticket.change_type%></div>
+        </div>      
+        <div class="control-group">
+          <div class="control-label">Product :</div>
+          <div class="controls"><%= @ticket.product.name if @ticket.product %></div>   
+        </div>
+         <div class="control-group">
+          <div class="control-label">Priority :</div>
+          <div class="controls"><%= @ticket.priority.name if @ticket.priority %></div>   
+        </div>
+
+        <div class="control-group">
+          <div class="control-label">Quote Value :</div>
+          <div class="controls"><%= @ticket.quote_values %></div>
+        </div>             
+  </fieldset>
+</div>
